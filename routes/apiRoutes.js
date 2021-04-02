@@ -32,7 +32,7 @@ router.post("/notes", (req, res) => {
     }
     notes.push(newNote);
     fs.writeFileSync("./db/db.json", JSON.stringify(notes));
-    res.status(201).json(notes);
+    res.status(201).json(newNote);
    // req.body hosts is equal to the JSON post sent from the user
   // This works because of our body parsing middleware
 });
@@ -48,7 +48,8 @@ router.delete("/notes/:id",(req, res) => {
     // console.log("-------------------")
     // console.log(filteredNotes)
     fs.writeFileSync("./db/db.json", JSON.stringify(filteredNotes));
-    res.status(200).json(filteredNotes);
+    res.status(200).json({ok:true});
+    // res.status(200).json(filteredNotes);
 });
 
 module.exports = router;
