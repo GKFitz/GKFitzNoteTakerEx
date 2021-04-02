@@ -32,14 +32,23 @@ router.post("/notes", (req, res) => {
     }
     notes.push(newNote);
     fs.writeFileSync("./db/db.json", JSON.stringify(notes));
-    res.json(notes);
+    res.status(201).json(notes);
    // req.body hosts is equal to the JSON post sent from the user
   // This works because of our body parsing middleware
 });
 
-// router.delete("api/notes/:id",(req, res) => {
-
-    
-// });
+router.delete("/notes/:id",(req, res) => {
+    console.log(req.params.id);
+    var idToDelete= req.params.id;
+    const notes= JSON.parse(fs.readFileSync ("./db/db.json"));
+    var filteredNotes= notes.filter((note) => {
+        return note.id !== idToDelete
+    })
+    // console.log(notes)
+    // console.log("-------------------")
+    // console.log(filteredNotes)
+    fs.writeFileSync("./db/db.json", JSON.stringify(filteredNotes));
+    res.status(200).json(filteredNotes);
+});
 
 module.exports = router;
