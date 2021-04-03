@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const store = require("../db/db.json");
+// const store = require("../db/db.json");
 var path = require("path");
 const fs= require("fs");
 const { v4: uuidv4 } = require('uuid');
@@ -11,7 +11,9 @@ const { v4: uuidv4 } = require('uuid');
 // (ex: localhost:PORT/api/admin... they are shown a JSON of the data in the table)
 //this saves notes and joins it to the db.json file
 router.get("/notes", (req, res) => {
-    res.status(200).json(store);
+    const notes= JSON.parse(fs.readFileSync ("./db/db.json"));
+    console.log(notes)
+    res.status(200).json(notes);
     
 });
 // API POST Requests
