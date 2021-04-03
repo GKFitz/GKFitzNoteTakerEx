@@ -1,5 +1,4 @@
 const router = require("express").Router();
-// const store = require("../db/db.json");
 var path = require("path");
 const fs= require("fs");
 const { v4: uuidv4 } = require('uuid');
